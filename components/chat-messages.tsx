@@ -61,7 +61,11 @@ export function ChatMessages({
           />
         </div>
       ))}
-      {showSpinner && <Spinner />}
+      {showSpinner && (
+        <div className="flex w-fit flex-row items-center gap-2">
+          Please hold on... <Spinner />
+        </div>
+      )}
     </div>
   )
 }

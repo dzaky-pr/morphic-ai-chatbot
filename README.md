@@ -1,4 +1,4 @@
-# Morphic
+# NUII
 
 An AI-powered search engine with a generative UI.
 
@@ -99,7 +99,7 @@ git clone git@github.com:[YOUR_GITHUB_ACCOUNT]/morphic.git
 ### 2. Install dependencies
 
 ```bash
-cd morphic
+cd nuii
 bun install
 ```
 
