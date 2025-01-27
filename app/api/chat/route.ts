@@ -14,7 +14,8 @@ import { cookies } from 'next/headers'
 
 export const maxDuration = 30
 
-const DEFAULT_MODEL = 'openai:gpt-4o-mini'
+// const DEFAULT_MODEL = 'openai:gpt-4o-mini'
+const DEFAULT_MODEL = 'lama-3.3-70b-specdec'
 
 export async function POST(req: Request) {
   try {
@@ -79,6 +80,8 @@ export async function POST(req: Request) {
                   responseMessages,
                   model
                 )
+
+                console.log('Generated Related Questions:', relatedQuestions)
 
                 // Update the annotation with the related questions
                 annotation = {
