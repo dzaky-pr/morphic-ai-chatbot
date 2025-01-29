@@ -43,17 +43,22 @@ export const models: Model[] = [
   //   providerId: 'google'
   // },
   {
-    id: 'llama-3.3-70b-versatile',
-    name: 'LLama 3.3-70b-versatile Groq',
-    provider: 'Groq',
+    id: 'llama-3.3-70b-specdec',
+    // LLama 3.3-70b-specdec Groq
+    name: 'Asisten AI Utama',
+    // Groq
+    provider: 'Pilih Asisten AI',
     providerId: 'groq'
   },
   {
-    id: 'llama-3.3-70b-specdec',
-    name: 'LLama 3.3-70b-specdec Groq',
-    provider: 'Groq',
+    id: 'llama-3.3-70b-versatile',
+    // LLama 3.3-70b-versatile Groq
+    name: 'Asisten AI Alternatif',
+    // Groq
+    provider: 'Pilih Asisten AI',
     providerId: 'groq'
   }
+
   // {
   //   id: 'qwen2.5',
   //   name: 'Qwen 2.5',

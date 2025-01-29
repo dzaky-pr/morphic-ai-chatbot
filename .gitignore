@@ -40,4 +40,4 @@ certificates
 
 # serwist
 public/sw*
-public/swe-worker*
+public/workbox-*

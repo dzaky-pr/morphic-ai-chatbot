@@ -1,4 +1,3 @@
-import Footer from '@/components/footer'
 import Header from '@/components/header'
 import PwaDownloadAnnouncement from '@/components/pwadownload'
 import { Sidebar } from '@/components/sidebar'
@@ -16,21 +15,46 @@ const fontSans = FontSans({
 
 const title = 'NUII AI'
 const description = 'Standar Konstruksi by Artificial Intelligence.'
+const url = 'https://nuii-chatbot.vercel.app'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https:/nuii-chatbot.vercel.app'),
-  title,
-  description,
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default'
+    // startUpImage: [],
+  },
+  formatDetection: {
+    telephone: false
+  },
+  metadataBase: new URL(url),
+  title: {
+    default: title,
+    template: `%s | ${title}`
+  },
+  description: description,
+  robots: { index: true, follow: true },
   openGraph: {
-    title,
-    description
+    url: url,
+    title: title,
+    description: description,
+    siteName: title,
+    // images: [`${url}/images/og/og-long.png`],
+    type: 'website',
+    locale: 'id_ID'
   },
   twitter: {
-    title,
-    description,
     card: 'summary_large_image',
-    creator: '@miiura'
-  }
+    title: title,
+    description: description,
+    // images: [`${url}/images/og/og-square.png`],
+    creator: '@nuii-ai'
+  },
+  authors: [
+    {
+      name: 'nuii-ai',
+      url: url
+    }
+  ]
 }
 
 export const viewport: Viewport = {
@@ -50,9 +74,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icon.png" />
-        <meta name="theme-color" content="#e0c8fd" />
+        <link rel="manifest" href="/favicon/site.webmanifest" />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon/favicon-96x96.png"
+          sizes="96x96"
+        />
+        <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/favicon/apple-touch-icon.png"
+        />
+        <meta name="apple-mobile-web-app-title" content="NUII AI" />
       </head>
       <body className={cn('font-sans antialiased', fontSans.variable)}>
         <PwaDownloadAnnouncement />
@@ -66,46 +102,10 @@ export default function RootLayout({
 
           {children}
           {enableSaveChatHistory && <Sidebar />}
-          <Footer />
+          {/* <Footer /> */}
           <Toaster />
         </ThemeProvider>
       </body>
     </html>
   )
 }
-
-// import type { Metadata } from 'next'
-// import './globals.css'
-
-// export const metadata: Metadata = {
-//   title: 'NextJs 15',
-//   description: 'Nextjs 15 starter template'
-// }
-
-// export default function RootLayout({
-//   children
-// }: Readonly<{
-//   children: React.ReactNode
-// }>) {
-//   return (
-//     <html lang="en">
-//       <head>
-//         <link rel="manifest" href="/manifest.json" />
-//         <link rel="apple-touch-icon" href="/icon.png" />
-//         <meta name="theme-color" content="#e0c8fd" />
-
-//         <meta property="og:title" content="Nextjs App" />
-//         <meta name="twitter:title" content="Nextjs App" />
-
-//         <meta name="description" content="Nextjs 14 starter template" />
-//         <meta property="og:description" content="Nextjs 14 starter template" />
-//         <meta name="twitter:description" content="Nextjs 14 starter template" />
-
-//         <meta property="og:image" content="https://i.imgur.com/Z3bMJXy.jpg" />
-//         <meta name="twitter:image" content="https://i.imgur.com/Z3bMJXy.jpg" />
-//       </head>
-//       {/* //! If you don't want 'screen size' visible at the left bottom of the browser window, You can remove `debug-screens` class */}
-//       <body>{children}</body>
-//     </html>
-//   )
-// }

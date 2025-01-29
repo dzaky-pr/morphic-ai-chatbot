@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { usePathname } from 'next/navigation'
@@ -49,9 +48,9 @@ export default function PwaDownloadAnnouncement() {
       prompt.prompt()
       prompt.userChoice.then(choiceResult => {
         if (choiceResult.outcome === 'accepted') {
-          toast.success('Hore, berhasil terinstall! 🎉')
+          toast.success('Aplikasi berhasil terinstall! 🎉')
         } else {
-          toast.warning('Yah, gagal terinstall 😢')
+          toast.warning('Aplikasi gagal terinstall!')
         }
 
         setPrompt(null)

@@ -16,7 +16,10 @@ export function BotMessage({ message }: { message: string }) {
   )
 
   // Modify the content to render LaTeX equations if LaTeX patterns are found
-  const processedData = preprocessLaTeX(message || '')
+  // const processedData = preprocessLaTeX(message || '')
+  const processedData = preprocessLaTeX(
+    Array.isArray(message) ? message.join('') : message
+  )
 
   if (containsLaTeX) {
     return (
@@ -36,7 +39,7 @@ export function BotMessage({ message }: { message: string }) {
   return (
     <MemoizedReactMarkdown
       rehypePlugins={[[rehypeExternalLinks, { target: '_blank' }]]}
-      remarkPlugins={[remarkGfm]}
+      remarkPlugins={[remarkGfm, remarkMath]}
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
       components={{
         code({ node, inline, className, children, ...props }) {
