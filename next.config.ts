@@ -1,20 +1,11 @@
-/* eslint-disable */
-import type { NextConfig } from 'next'
-
-const runtimeCaching = require('next-pwa/cache')
-const withPWA = require('next-pwa')({
+const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  runtimeCaching,
   disable: process.env.NODE_ENV === 'development'
 })
 
-const nextConfig: NextConfig = withPWA({
-  eslint: {
-    dirs: ['src'],
-    ignoreDuringBuilds: true
-  }
+module.exports = withPWA({
+  // Your Next.js config
+  reactStrictMode: true
 })
-
-export default nextConfig

@@ -13,51 +13,60 @@ const fontSans = FontSans({
   variable: '--font-sans'
 })
 
-const title = 'NUII AI'
-const description = 'Standar Konstruksi by Artificial Intelligence.'
-const url = 'https://nuii-chatbot.vercel.app'
+const APP_NAME = 'NUII AI'
+const APP_DEFAULT_TITLE = 'NUII AI'
+const APP_TITLE_TEMPLATE = '%s - NUII AI'
+const APP_DESCRIPTION = 'Standar Konstruksi by Artificial Intelligence'
+const APP_URL = 'https://nuii-ai.vercel.app'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(APP_URL),
+  applicationName: APP_NAME,
+  title: {
+    default: APP_DEFAULT_TITLE,
+    template: APP_TITLE_TEMPLATE
+  },
+  description: APP_DESCRIPTION,
+  manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default'
+    statusBarStyle: 'default',
+    title: APP_DEFAULT_TITLE
     // startUpImage: [],
   },
   formatDetection: {
     telephone: false
   },
-  metadataBase: new URL(url),
-  title: {
-    default: title,
-    template: `%s | ${title}`
-  },
-  description: description,
   robots: { index: true, follow: true },
+
   openGraph: {
-    url: url,
-    title: title,
-    description: description,
-    siteName: title,
-    // images: [`${url}/images/og/og-long.png`],
     type: 'website',
+    siteName: APP_NAME,
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE
+    },
+    description: APP_DESCRIPTION,
     locale: 'id_ID'
   },
   twitter: {
-    card: 'summary_large_image',
-    title: title,
-    description: description,
-    // images: [`${url}/images/og/og-square.png`],
-    creator: '@nuii-ai'
+    card: 'summary',
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE
+    },
+    description: APP_DESCRIPTION
   },
   authors: [
     {
       name: 'nuii-ai',
-      url: url
+      url: APP_URL
     }
   ]
 }
 
 export const viewport: Viewport = {
+  themeColor: '#FFFFFF',
   width: 'device-width',
   initialScale: 1,
   minimumScale: 1,
@@ -74,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="manifest" href="/favicon/site.webmanifest" />
+        <link rel="manifest" href="/manifest.json" />
         <link
           rel="icon"
           type="image/png"
