@@ -81,8 +81,6 @@ export async function POST(req: Request) {
                   model
                 )
 
-                console.log('Generated Related Questions:', relatedQuestions)
-
                 // Update the annotation with the related questions
                 annotation = {
                   ...annotation,
