@@ -5,9 +5,12 @@ import { Sidebar } from '@/components/sidebar'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
+import { dark } from '@clerk/themes'
 import type { Metadata, Viewport } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import './globals.css'
+
+import { ClerkProvider } from '@clerk/nextjs'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -81,41 +84,47 @@ export default function RootLayout({
 }>) {
   const enableSaveChatHistory =
     process.env.NEXT_PUBLIC_ENABLE_SAVE_CHAT_HISTORY === 'true'
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="manifest" href="/manifest.json" />
-        <link
-          rel="icon"
-          type="image/png"
-          href="/favicon/favicon-96x96.png"
-          sizes="96x96"
-        />
-        <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-        <link rel="shortcut icon" href="/favicon/favicon.ico" />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon/apple-touch-icon.png"
-        />
-        <meta name="apple-mobile-web-app-title" content="NUII AI" />
-      </head>
-      <body className={cn('font-sans antialiased', fontSans.variable)}>
-        <PwaDownloadAnnouncement />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Header />
 
-          {children}
-          {enableSaveChatHistory && <Sidebar />}
-          <Footer />
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
+  return (
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark
+      }}
+    >
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          <link rel="manifest" href="/manifest.json" />
+          <link
+            rel="icon"
+            type="image/png"
+            href="/favicon/favicon-96x96.png"
+            sizes="96x96"
+          />
+          <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+          <link rel="shortcut icon" href="/favicon/favicon.ico" />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/favicon/apple-touch-icon.png"
+          />
+          <meta name="apple-mobile-web-app-title" content="NUII AI" />
+        </head>
+        <body className={cn('font-sans antialiased', fontSans.variable)}>
+          <PwaDownloadAnnouncement />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            {children}
+            {enableSaveChatHistory && <Sidebar />}
+            <Footer />
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
