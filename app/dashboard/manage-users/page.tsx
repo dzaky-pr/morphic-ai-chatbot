@@ -1,14 +1,14 @@
 import { redirect } from 'next/navigation'
 
 import { SearchUsers } from '@/components/search-users'
-import { checkRole } from '@/lib/utils/roles'
+import { UserActions } from '@/components/user-action'
+import { checkRoleServer } from '@/lib/utils/roles'
 import { clerkClient } from '@clerk/nextjs/server'
-import { removeRole, setRole } from './_action'
 
 export default async function AdminDashboard(params: {
   searchParams: Promise<{ search?: string }>
 }) {
-  if (!checkRole('admin')) {
+  if (!checkRoleServer('admin')) {
     redirect('/')
   }
 
@@ -67,38 +67,8 @@ export default async function AdminDashboard(params: {
                   <td className="px-4 py-2 border">
                     {user.publicMetadata.role as string}
                   </td>
-                  <td className="px-4 py-2 border flex space-x-2">
-                    <form action={setRole}>
-                      <input type="hidden" value={user.id} name="id" />
-                      <input type="hidden" value="admin" name="role" />
-                      <button
-                        type="submit"
-                        className="bg-blue-500  px-3 py-1 rounded hover:bg-blue-600"
-                      >
-                        Make Admin
-                      </button>
-                    </form>
-
-                    <form action={setRole}>
-                      <input type="hidden" value={user.id} name="id" />
-                      <input type="hidden" value="user" name="role" />
-                      <button
-                        type="submit"
-                        className="bg-green-500  px-3 py-1 rounded hover:bg-green-600"
-                      >
-                        Make Basic User
-                      </button>
-                    </form>
-
-                    <form action={removeRole}>
-                      <input type="hidden" value={user.id} name="id" />
-                      <button
-                        type="submit"
-                        className="bg-red-500  px-3 py-1 rounded hover:bg-red-600"
-                      >
-                        Remove Role
-                      </button>
-                    </form>
+                  <td className="px-4 py-2 border">
+                    <UserActions userId={user.id} />
                   </td>
                 </tr>
               ))

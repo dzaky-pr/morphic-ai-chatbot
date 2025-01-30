@@ -15,12 +15,17 @@ export const Header: React.FC = async () => {
         </a>
       </div>
       <div className="flex gap-3 items-center">
-        <div className="flex w-fit h-fit">
+        <div className="flex w-fit h-fit ">
           <SignedOut>
-            <SignInButton />
+            <div className="border px-4 py-2 border-primary rounded-lg hover:bg-primary-foreground">
+              <SignInButton />
+            </div>
           </SignedOut>
+
           <SignedIn>
-            <UserButtonCustom />
+            <div className="border w-fit h-fit flex p-1.5 border-primary rounded-full">
+              <UserButtonCustom />
+            </div>
           </SignedIn>
         </div>
         <ModeToggle />
