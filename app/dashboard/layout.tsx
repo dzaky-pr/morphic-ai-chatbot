@@ -20,10 +20,21 @@ export default function DashboardLayout({
 
   const role = user?.publicMetadata?.role
 
-  if (role === '' || role === null || role === undefined) {
-    toast.error('Anda belum diverif oleh admin!', {})
+  if (!user || !role) {
+    // Kalau user tidak ada atau role tidak ada
+    if (!user) {
+      toast.error('Anda tidak memiliki akses!', {})
+      router.push('/')
+    } else {
+      toast.error('Anda belum diverifikasi oleh Admin!', {})
+      router.push('/')
+    }
+  } else if (role === 'user' || role === 'admin') {
+    // Jika role ada dan role 'user'
+    return <>{children}</>
+  } else {
+    // Jika role ada, tapi bukan 'user'
+    toast.error('Akses ditolak!', {})
     router.push('/')
   }
-
-  return <>{children}</>
 }
