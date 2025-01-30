@@ -21,7 +21,7 @@ export default async function AdminDashboard(params: {
     : (await client.users.getUserList()).data // Menampilkan semua user jika tidak ada query pencarian
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto min-h-screen h-full p-6 bg-background">
       <h2 className="text-2xl font-semibold mb-4">Manage Users</h2>
 
       <SearchUsers />

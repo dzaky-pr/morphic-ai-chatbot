@@ -45,7 +45,7 @@ export const models: Model[] = [
   {
     id: 'llama-3.3-70b-specdec',
     // LLama 3.3-70b-specdec Groq
-    name: 'Asisten AI Utama',
+    name: 'llama-3.3-70b-specdec (utama)',
     // Groq
     provider: 'Pilih Asisten AI',
     providerId: 'groq'
@@ -53,7 +53,7 @@ export const models: Model[] = [
   {
     id: 'llama-3.3-70b-versatile',
     // LLama 3.3-70b-versatile Groq
-    name: 'Asisten AI Alternatif',
+    name: 'llama-3.3-70b-versatile (alternatif)',
     // Groq
     provider: 'Pilih Asisten AI',
     providerId: 'groq'

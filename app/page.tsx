@@ -6,7 +6,7 @@ import './globals.css'
 
 export default function Page() {
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="flex flex-col h-screen bg-background mx-auto container ">
       {/* Hero Section */}
       <header className="flex flex-col items-center justify-center bg-gradient-to-r bg-background h-[70vh] text-center py-12">
         <h1 className="text-5xl font-bold mb-4">NUII AI</h1>
@@ -55,7 +55,7 @@ export default function Page() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-background text-center ">
+      <footer className="py-4 bg-background text-center text-xs">
         <p>&copy; {new Date().getFullYear()} NUII AI. All rights reserved.</p>
       </footer>
     </div>
