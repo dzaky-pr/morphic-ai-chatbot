@@ -44,13 +44,13 @@ export function ChatShare({ chatId, className }: ChatShareProps) {
       return
     }
 
-    if (!result.sharePath) {
-      toast.error('Could not copy link to clipboard')
-      return
-    }
+    // if (!result.sharePath) {
+    //   toast.error('Could not copy link to clipboard')
+    //   return
+    // }
 
-    const url = new URL(result.sharePath, window.location.href)
-    setShareUrl(url.toString())
+    // const url = new URL(result.sharePath, window.location.href)
+    // setShareUrl(url.toString())
   }
 
   const handleCopy = () => {

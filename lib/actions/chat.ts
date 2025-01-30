@@ -1,9 +1,9 @@
 'use server'
 
+import { getRedisClient, RedisWrapper } from '@/lib/redis/config'
+import { type Chat } from '@/lib/types'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { type Chat } from '@/lib/types'
-import { getRedisClient, RedisWrapper } from '@/lib/redis/config'
 
 async function getRedis(): Promise<RedisWrapper> {
   return await getRedisClient()
@@ -63,98 +63,101 @@ export async function getChats(userId?: string | null) {
 }
 
 export async function getChat(id: string, userId: string = 'anonymous') {
-  const redis = await getRedis()
-  const chat = await redis.hgetall<Chat>(`chat:${id}`)
+  // const redis = await getRedis()
+  // const chat = await redis.hgetall<Chat>(`chat:${id}`)
 
-  if (!chat) {
-    return null
-  }
+  // if (!chat) {
+  //   return null
+  // }
 
-  // Parse the messages if they're stored as a string
-  if (typeof chat.messages === 'string') {
-    try {
-      chat.messages = JSON.parse(chat.messages)
-    } catch (error) {
-      chat.messages = []
-    }
-  }
+  // // Parse the messages if they're stored as a string
+  // if (typeof chat.messages === 'string') {
+  //   try {
+  //     chat.messages = JSON.parse(chat.messages)
+  //   } catch (error) {
+  //     chat.messages = []
+  //   }
+  // }
 
-  // Ensure messages is always an array
-  if (!Array.isArray(chat.messages)) {
-    chat.messages = []
-  }
+  // // Ensure messages is always an array
+  // if (!Array.isArray(chat.messages)) {
+  //   chat.messages = []
+  // }
 
-  return chat
+  // return chat
+  return null
 }
 
 export async function clearChats(
   userId: string = 'anonymous'
 ): Promise<{ error?: string }> {
-  const redis = await getRedis()
-  const userChatKey = getUserChatKey(userId)
-  const chats = await redis.zrange(userChatKey, 0, -1)
-  if (!chats.length) {
-    return { error: 'No chats to clear' }
-  }
-  const pipeline = redis.pipeline()
+  // const redis = await getRedis()
+  // const userChatKey = getUserChatKey(userId)
+  // const chats = await redis.zrange(userChatKey, 0, -1)
+  // if (!chats.length) {
+  //   return { error: 'No chats to clear' }
+  // }
+  // const pipeline = redis.pipeline()
 
-  for (const chat of chats) {
-    pipeline.del(chat)
-    pipeline.zrem(userChatKey, chat)
-  }
+  // for (const chat of chats) {
+  //   pipeline.del(chat)
+  //   pipeline.zrem(userChatKey, chat)
+  // }
 
-  await pipeline.exec()
+  // await pipeline.exec()
 
   revalidatePath('/')
   redirect('/')
+
+  // ! debugging
+  return {}
 }
 
 export async function saveChat(chat: Chat, userId: string = 'anonymous') {
-  try {
-    const redis = await getRedis()
-    const pipeline = redis.pipeline()
-
-    const chatToSave = {
-      ...chat,
-      messages: JSON.stringify(chat.messages)
-    }
-
-    pipeline.hmset(`chat:${chat.id}`, chatToSave)
-    pipeline.zadd(getUserChatKey(userId), Date.now(), `chat:${chat.id}`)
-
-    const results = await pipeline.exec()
-
-    return results
-  } catch (error) {
-    throw error
-  }
+  // try {
+  //   const redis = await getRedis()
+  //   const pipeline = redis.pipeline()
+  //   const chatToSave = {
+  //     ...chat,
+  //     messages: JSON.stringify(chat.messages)
+  //   }
+  //   pipeline.hmset(`chat:${chat.id}`, chatToSave)
+  //   pipeline.zadd(getUserChatKey(userId), Date.now(), `chat:${chat.id}`)
+  //   const results = await pipeline.exec()
+  //   return results
+  // } catch (error) {
+  //   throw error
+  // }
 }
 
 export async function getSharedChat(id: string) {
-  const redis = await getRedis()
-  const chat = await redis.hgetall<Chat>(`chat:${id}`)
+  // const redis = await getRedis()
+  // const chat = await redis.hgetall<Chat>(`chat:${id}`)
 
-  if (!chat || !chat.sharePath) {
-    return null
-  }
+  // if (!chat || !chat.sharePath) {
+  //   return null
+  // }
 
-  return chat
+  // return chat
+  return null
 }
 
 export async function shareChat(id: string, userId: string = 'anonymous') {
-  const redis = await getRedis()
-  const chat = await redis.hgetall<Chat>(`chat:${id}`)
+  // const redis = await getRedis()
+  // const chat = await redis.hgetall<Chat>(`chat:${id}`)
 
-  if (!chat || chat.userId !== userId) {
-    return null
-  }
+  // if (!chat || chat.userId !== userId) {
+  //   return null
+  // }
 
-  const payload = {
-    ...chat,
-    sharePath: `/share/${id}`
-  }
+  // const payload = {
+  //   ...chat,
+  //   sharePath: `/share/${id}`
+  // }
 
-  await redis.hmset(`chat:${id}`, payload)
+  // await redis.hmset(`chat:${id}`, payload)
 
-  return payload
+  // return payload
+
+  return null
 }

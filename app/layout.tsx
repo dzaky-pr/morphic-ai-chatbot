@@ -1,3 +1,4 @@
+import Footer from '@/components/footer'
 import Header from '@/components/header'
 import PwaDownloadAnnouncement from '@/components/pwadownload'
 import { Sidebar } from '@/components/sidebar'
@@ -111,7 +112,7 @@ export default function RootLayout({
 
           {children}
           {enableSaveChatHistory && <Sidebar />}
-          {/* <Footer /> */}
+          <Footer />
           <Toaster />
         </ThemeProvider>
       </body>

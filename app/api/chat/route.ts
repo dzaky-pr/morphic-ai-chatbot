@@ -1,5 +1,4 @@
 import { getChat, saveChat } from '@/lib/actions/chat'
-import { generateRelatedQuestions } from '@/lib/agents/generate-related-questions'
 import { researcher } from '@/lib/agents/researcher'
 import { ExtendedCoreMessage } from '@/lib/types'
 import { convertToExtendedCoreMessages } from '@/lib/utils'
@@ -76,16 +75,16 @@ export async function POST(req: Request) {
                 dataStream.writeMessageAnnotation(annotation)
 
                 // Generate related questions
-                const relatedQuestions = await generateRelatedQuestions(
-                  responseMessages,
-                  model
-                )
+                // const relatedQuestions = await generateRelatedQuestions(
+                //   responseMessages,
+                //   model
+                // )
 
                 // Update the annotation with the related questions
-                annotation = {
-                  ...annotation,
-                  data: relatedQuestions.object
-                }
+                // annotation = {
+                //   ...annotation,
+                //   data: relatedQuestions.object
+                // }
 
                 // Send related questions to client
                 dataStream.writeMessageAnnotation(annotation)

@@ -72,7 +72,7 @@ export function ChatPanel({
       className={cn(
         'mx-auto w-full',
         messages.length > 0
-          ? 'fixed bottom-0 left-0 right-0 bg-background'
+          ? 'fixed bottom-0 left-0 right-0 bg-background mb-5'
           : 'fixed bottom-8 left-0 right-0 top-24 flex flex-col items-center justify-center'
       )}
     >
@@ -150,6 +150,7 @@ export function ChatPanel({
             onFocus={() => setShowEmptyScreen(true)}
             onBlur={() => setShowEmptyScreen(false)}
           />
+
           <Button
             type={isLoading ? 'button' : 'submit'}
             size={'icon'}
