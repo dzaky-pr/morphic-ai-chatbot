@@ -1,5 +1,3 @@
-// app/page.tsx
-
 import { ShinyButton } from '@/components/ui/shiny-button'
 import Link from 'next/link'
 import './globals.css'

@@ -1,6 +1,5 @@
 import Header from '@/components/header'
 import PwaDownloadAnnouncement from '@/components/pwadownload'
-import { Sidebar } from '@/components/sidebar'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
@@ -35,7 +34,6 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: 'default',
     title: APP_DEFAULT_TITLE
-    // startUpImage: [],
   },
   formatDetection: {
     telephone: false
@@ -81,9 +79,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const enableSaveChatHistory =
-    process.env.NEXT_PUBLIC_ENABLE_SAVE_CHAT_HISTORY === 'true'
-
   return (
     <ClerkProvider
       appearance={{
@@ -118,7 +113,6 @@ export default function RootLayout({
           >
             <Header />
             {children}
-            {enableSaveChatHistory && <Sidebar />}
 
             <Toaster />
           </ThemeProvider>

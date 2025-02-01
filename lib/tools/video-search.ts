@@ -1,5 +1,5 @@
-import { tool } from 'ai'
 import { searchSchema } from '@/lib/schema/search'
+import { tool } from 'ai'
 
 export const videoSearchTool = tool({
   description: 'Search for videos from YouTube',

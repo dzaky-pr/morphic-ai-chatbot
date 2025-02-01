@@ -44,19 +44,33 @@ export const models: Model[] = [
   // },
   {
     id: 'llama-3.3-70b-specdec',
-    // LLama 3.3-70b-specdec Groq
-    name: 'llama-3.3-70b-specdec (utama)',
-    // Groq
-    provider: 'Pilih Asisten AI',
+    name: 'LLama 3.3-70b-specdec Groq (remove from production)',
+    provider: 'Groq',
     providerId: 'groq'
   },
   {
     id: 'llama-3.3-70b-versatile',
-    // LLama 3.3-70b-versatile Groq
-    name: 'llama-3.3-70b-versatile (alternatif)',
-    // Groq
-    provider: 'Pilih Asisten AI',
+    name: 'LLama 3.3-70b-versatile Groq',
+    provider: 'Groq',
     providerId: 'groq'
+  },
+  {
+    id: 'gemma2-9b-it',
+    name: 'gemma2-9b-it Groq',
+    provider: 'Groq',
+    providerId: 'groq'
+  },
+  {
+    id: 'mixtral-8x7b-32768',
+    name: 'mixtral-8x7b-32768 Groq',
+    provider: 'Groq',
+    providerId: 'groq'
+  },
+  {
+    id: 'accounts/fireworks/models/deepseek-r1',
+    name: 'DeepSeek R1',
+    provider: 'Fireworks',
+    providerId: 'fireworks'
   }
 
   // {

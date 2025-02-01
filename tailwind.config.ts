@@ -43,7 +43,12 @@ const config = {
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
+          foreground: 'hsl(var(--accent-foreground))',
+          blue: {
+            DEFAULT: 'hsl(var(--accent-blue))',
+            foreground: 'hsl(var(--accent-blue-foreground))',
+            border: 'hsl(var(--accent-blue-border))'
+          }
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',

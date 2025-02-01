@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react'
 import Textarea from 'react-textarea-autosize'
 import { EmptyScreen } from './empty-screen'
 import { ModelSelector } from './model-selector'
+import { SearchModeToggle } from './search-mode-toggle'
 import { Button } from './ui/button'
 import { IconLogo } from './ui/icons'
 
@@ -74,7 +75,7 @@ export function ChatPanel({
         'mx-auto w-full',
         messages.length > 0
           ? 'fixed bottom-0 left-0 right-0 bg-background mb-5'
-          : 'fixed bottom-0 left-0 right-0 top-6 flex flex-col items-center justify-center'
+          : 'fixed bottom-8 left-0 right-0 top-6 flex flex-col items-center justify-center'
       )}
     >
       {messages.length === 0 && (
@@ -130,6 +131,7 @@ export function ChatPanel({
           <div className="flex items-center justify-between p-3">
             <div className="flex items-center gap-2">
               <ModelSelector />
+              <SearchModeToggle />
             </div>
             <div className="flex items-center gap-2">
               {messages.length > 0 && (
