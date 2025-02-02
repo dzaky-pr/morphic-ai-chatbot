@@ -1,5 +1,4 @@
 import Header from '@/components/header'
-import PwaDownloadAnnouncement from '@/components/pwadownload'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
@@ -104,7 +103,6 @@ export default function RootLayout({
           <meta name="apple-mobile-web-app-title" content="NUII AI" />
         </head>
         <body className={cn('font-sans antialiased', fontSans.variable)}>
-          <PwaDownloadAnnouncement />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

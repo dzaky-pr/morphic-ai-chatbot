@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import Textarea from 'react-textarea-autosize'
 import { EmptyScreen } from './empty-screen'
+import Footer from './footer'
 import { ModelSelector } from './model-selector'
 import { SearchModeToggle } from './search-mode-toggle'
 import { Button } from './ui/button'
@@ -70,107 +71,110 @@ export function ChatPanel({
   }, [query])
 
   return (
-    <div
-      className={cn(
-        'mx-auto w-full',
-        messages.length > 0
-          ? 'fixed bottom-0 left-0 right-0 bg-background mb-5'
-          : 'fixed bottom-8 left-0 right-0 top-6 flex flex-col items-center justify-center'
-      )}
-    >
-      {messages.length === 0 && (
-        <div className="mb-8">
-          <IconLogo className="size-12 text-muted-foreground" />
-        </div>
-      )}
-      <form
-        onSubmit={handleSubmit}
+    <>
+      <div
         className={cn(
-          'max-w-3xl w-full mx-auto',
-          messages.length > 0 ? 'px-2 py-4' : 'px-6'
+          'mx-auto w-full',
+          messages.length > 0
+            ? 'fixed bottom-0 left-0 right-0 bg-background pb-8 sm:pb-4'
+            : 'fixed bottom-8 left-0 right-0 top-6 flex flex-col items-center justify-center'
         )}
       >
-        <div className="relative flex flex-col w-full gap-2 bg-muted rounded-3xl border border-input">
-          <Textarea
-            ref={inputRef}
-            name="input"
-            rows={2}
-            maxRows={5}
-            tabIndex={0}
-            onCompositionStart={handleCompositionStart}
-            onCompositionEnd={handleCompositionEnd}
-            placeholder="Ask a question..."
-            spellCheck={false}
-            value={input}
-            className="resize-none w-full min-h-12 bg-transparent border-0 px-4 py-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-            onChange={e => {
-              handleInputChange(e)
-              setShowEmptyScreen(e.target.value.length === 0)
-            }}
-            onKeyDown={e => {
-              if (
-                e.key === 'Enter' &&
-                !e.shiftKey &&
-                !isComposing &&
-                !enterDisabled
-              ) {
-                if (input.trim().length === 0) {
+        {messages.length === 0 && (
+          <div className="mb-8">
+            <IconLogo className="size-12 text-muted-foreground" />
+          </div>
+        )}
+        <form
+          onSubmit={handleSubmit}
+          className={cn(
+            'max-w-3xl w-full mx-auto',
+            messages.length > 0 ? 'px-2 py-4' : 'px-6'
+          )}
+        >
+          <div className="relative flex flex-col w-full gap-2 bg-muted rounded-3xl border border-input">
+            <Textarea
+              ref={inputRef}
+              name="input"
+              rows={2}
+              maxRows={5}
+              tabIndex={0}
+              onCompositionStart={handleCompositionStart}
+              onCompositionEnd={handleCompositionEnd}
+              placeholder="Ask a question..."
+              spellCheck={false}
+              value={input}
+              className="resize-none w-full min-h-12 bg-transparent border-0 px-4 py-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+              onChange={e => {
+                handleInputChange(e)
+                setShowEmptyScreen(e.target.value.length === 0)
+              }}
+              onKeyDown={e => {
+                if (
+                  e.key === 'Enter' &&
+                  !e.shiftKey &&
+                  !isComposing &&
+                  !enterDisabled
+                ) {
+                  if (input.trim().length === 0) {
+                    e.preventDefault()
+                    return
+                  }
                   e.preventDefault()
-                  return
+                  const textarea = e.target as HTMLTextAreaElement
+                  textarea.form?.requestSubmit()
                 }
-                e.preventDefault()
-                const textarea = e.target as HTMLTextAreaElement
-                textarea.form?.requestSubmit()
-              }
-            }}
-            onFocus={() => setShowEmptyScreen(true)}
-            onBlur={() => setShowEmptyScreen(false)}
-          />
+              }}
+              onFocus={() => setShowEmptyScreen(true)}
+              onBlur={() => setShowEmptyScreen(false)}
+            />
 
-          {/* Bottom menu area */}
-          <div className="flex items-center justify-between p-3">
-            <div className="flex items-center gap-2">
-              <ModelSelector />
-              <SearchModeToggle />
-            </div>
-            <div className="flex items-center gap-2">
-              {messages.length > 0 && (
+            {/* Bottom menu area */}
+            <div className="flex gap-2 sm:gap-0 sm:flex-row flex-col items-center flex-wrap justify-between p-3">
+              <div className="flex items-center gap-2 w-full sm:w-fit justify-start">
+                <ModelSelector />
+                <SearchModeToggle />
+              </div>
+              <div className="flex items-center gap-2 w-full sm:w-fit justify-end">
+                {messages.length > 0 && (
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={handleNewChat}
+                    className="shrink-0 rounded-full group"
+                    type="button"
+                    disabled={isLoading}
+                  >
+                    <MessageCirclePlus className="size-4 group-hover:rotate-12 transition-all" />
+                  </Button>
+                )}
                 <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={handleNewChat}
-                  className="shrink-0 rounded-full group"
-                  type="button"
-                  disabled={isLoading}
+                  type={isLoading ? 'button' : 'submit'}
+                  size={'icon'}
+                  variant={'outline'}
+                  className={cn(isLoading && 'animate-pulse', 'rounded-full')}
+                  disabled={input.length === 0 && !isLoading}
+                  onClick={isLoading ? stop : undefined}
                 >
-                  <MessageCirclePlus className="size-4 group-hover:rotate-12 transition-all" />
+                  {isLoading ? <Square size={20} /> : <ArrowUp size={20} />}
                 </Button>
-              )}
-              <Button
-                type={isLoading ? 'button' : 'submit'}
-                size={'icon'}
-                variant={'outline'}
-                className={cn(isLoading && 'animate-pulse', 'rounded-full')}
-                disabled={input.length === 0 && !isLoading}
-                onClick={isLoading ? stop : undefined}
-              >
-                {isLoading ? <Square size={20} /> : <ArrowUp size={20} />}
-              </Button>
+              </div>
             </div>
           </div>
-        </div>
 
-        {messages.length === 0 && (
-          <EmptyScreen
-            submitMessage={message => {
-              handleInputChange({
-                target: { value: message }
-              } as React.ChangeEvent<HTMLTextAreaElement>)
-            }}
-            className={cn(showEmptyScreen ? 'visible' : 'invisible')}
-          />
-        )}
-      </form>
-    </div>
+          {messages.length === 0 && (
+            <EmptyScreen
+              submitMessage={message => {
+                handleInputChange({
+                  target: { value: message }
+                } as React.ChangeEvent<HTMLTextAreaElement>)
+              }}
+              className={cn(showEmptyScreen ? 'visible' : 'invisible')}
+            />
+          )}
+        </form>
+      </div>
+      <Footer />
+    </>
   )
 }

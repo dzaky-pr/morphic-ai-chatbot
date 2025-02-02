@@ -42,27 +42,22 @@ export const models: Model[] = [
   //   provider: 'Google Generative AI',
   //   providerId: 'google'
   // },
-  {
-    id: 'llama-3.3-70b-specdec',
-    name: 'LLama 3.3-70b-specdec Groq (remove from production)',
-    provider: 'Groq',
-    providerId: 'groq'
-  },
+
   {
     id: 'llama-3.3-70b-versatile',
-    name: 'LLama 3.3-70b-versatile Groq',
+    name: 'llama-3.3-70b-versatile',
     provider: 'Groq',
     providerId: 'groq'
   },
   {
     id: 'gemma2-9b-it',
-    name: 'gemma2-9b-it Groq',
+    name: 'gemma2-9b-it',
     provider: 'Groq',
     providerId: 'groq'
   },
   {
     id: 'mixtral-8x7b-32768',
-    name: 'mixtral-8x7b-32768 Groq',
+    name: 'mixtral-8x7b-32768',
     provider: 'Groq',
     providerId: 'groq'
   },
