@@ -28,14 +28,16 @@ export default async function AdminDashboard(params: {
 
       <div className="overflow-x-auto mt-6">
         <table className="min-w-full bg-background border border-gray-300 shadow-md rounded-lg">
-          <thead className="bg-background">
+          <thead className="bg-background ">
             <tr>
-              <th className="px-4 py-2 border">No.</th>
-              <th className="px-4 py-2 border">Name</th>
-              <th className="px-4 py-2 border">Primary Email</th>
-              <th className="px-4 py-2 border">User ID</th>
-              <th className="px-4 py-2 border">Role</th>
-              <th className="px-4 py-2 border">Actions</th>
+              <th className="px-4 py-2 border border-gray-300 ">No.</th>
+              <th className="px-4 py-2 border border-gray-300">Name</th>
+              <th className="px-4 py-2 border border-gray-300">
+                Primary Email
+              </th>
+              <th className="px-4 py-2 border border-gray-300">User ID</th>
+              <th className="px-4 py-2 border border-gray-300">Role</th>
+              <th className="px-4 py-2 border border-gray-300">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -51,24 +53,36 @@ export default async function AdminDashboard(params: {
             ) : (
               users.map((user, index) => (
                 <tr key={user.id} className="border-t">
-                  <td className="px-4 py-2 border">{index + 1}</td>
+                  <td className="px-4 py-2  border-gray-300 border">
+                    {index + 1}
+                  </td>
 
-                  <td className="px-4 py-2 border">
+                  <td className="px-4 py-2 border-gray-300 border">
                     {user.firstName} {user.lastName}
                   </td>
-                  <td className="px-4 py-2 border">
+                  <td className="px-4 py-2 border-gray-300 border">
                     {
                       user.emailAddresses.find(
                         email => email.id === user.primaryEmailAddressId
                       )?.emailAddress
                     }
                   </td>
-                  <td className="px-4 py-2 border">{user.id}</td>
-                  <td className="px-4 py-2 border">
+                  <td className="px-4 py-2 border-gray-300 border">
+                    {user.id}
+                  </td>
+                  <td className="px-4 py-2 border-gray-300 border">
                     {user.publicMetadata.role as string}
                   </td>
-                  <td className="px-4 py-2 border">
-                    <UserActions userId={user.id} />
+                  <td className="px-4 py-2 border-gray-300 border">
+                    <UserActions
+                      userId={user.id}
+                      userName={`${user.firstName} ${user.lastName}`}
+                      userEmail={
+                        user.emailAddresses.find(
+                          email => email.id === user.primaryEmailAddressId
+                        )?.emailAddress || ''
+                      }
+                    />
                   </td>
                 </tr>
               ))

@@ -6,7 +6,15 @@ import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
 import { Button } from './ui/button'
 
-export function UserActions({ userId }: { userId: string }) {
+export function UserActions({
+  userId,
+  userName,
+  userEmail
+}: {
+  userId: string
+  userName: string
+  userEmail: string
+}) {
   const [modalOpen, setModalOpen] = useState(false)
   const [action, setAction] = useState<'admin' | 'user' | 'remove' | null>(null)
 
@@ -75,9 +83,17 @@ export function UserActions({ userId }: { userId: string }) {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-background p-6 rounded-lg shadow-lg">
             <h3 className="text-lg font-semibold mb-4">
-              {action === 'remove'
-                ? "Are you sure you want to remove this user's role?"
-                : `Change role to ${action}?`}
+              {action === 'remove' ? (
+                <>
+                  Are you sure you want to remove the role of:
+                  <br />
+                  <span className="text-red-500 text-base">{userName}</span>
+                  <br />
+                  <span className="text-red-500 text-base">{userEmail}</span>?
+                </>
+              ) : (
+                `Change role to ${action}?`
+              )}
             </h3>
 
             <div className="flex justify-end space-x-2">
@@ -90,7 +106,13 @@ export function UserActions({ userId }: { userId: string }) {
               <Button
                 onClick={handleConfirm}
                 disabled={pending}
-                className="px-4 py-2 bg-blue-500  rounded-lg hover:bg-blue-600"
+                className={`px-4 py-2 rounded-lg ${
+                  action === 'admin'
+                    ? 'bg-blue-500 hover:bg-blue-600'
+                    : action === 'user'
+                    ? 'bg-green-500 hover:bg-green-600'
+                    : 'bg-red-500 hover:bg-red-600'
+                }`}
               >
                 {pending ? 'Processing...' : 'Confirm'}
               </Button>

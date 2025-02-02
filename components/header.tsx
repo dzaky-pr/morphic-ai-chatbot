@@ -9,7 +9,7 @@ import UserButtonCustom from './user-button'
 
 export const Header: React.FC = async () => {
   return (
-    <header className="shadow-lg bg-background px-6 sm:px-10 py-3 md:py-5 sticky top-0 w-full flex justify-between items-center z-10 backdrop-blur md:backdrop-blur-none ">
+    <header className="shadow-lg bg-background px-6 sm:px-10 py-3 sticky top-0 w-full flex justify-between items-center z-10 backdrop-blur md:backdrop-blur-none ">
       <div>
         <Link href="/">
           <IconLogo className={cn('w-8 h-8')} />
