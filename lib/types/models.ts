@@ -25,8 +25,14 @@ export const models: Model[] = [
   //   providerId: 'anthropic'
   // },
   // {
-  //   id: 'claude-3-5-haiku-20241022',
+  //   id: 'claude-3-5-haiku-latest',
   //   name: 'Claude 3.5 Haiku',
+  //   provider: 'Anthropic',
+  //   providerId: 'anthropic'
+  // },
+  // {
+  //   id: 'claude-3-opus-latest',
+  //   name: 'Claude 3 Opus',
   //   provider: 'Anthropic',
   //   providerId: 'anthropic'
   // },
@@ -64,6 +70,12 @@ export const models: Model[] = [
   {
     id: 'accounts/fireworks/models/deepseek-r1',
     name: 'DeepSeek R1',
+    provider: 'Fireworks',
+    providerId: 'fireworks'
+  },
+  {
+    id: 'accounts/fireworks/models/llama-v3p1-405b-instruct',
+    name: 'llama-v3p1-405b-instruct',
     provider: 'Fireworks',
     providerId: 'fireworks'
   }
